@@ -1,0 +1,56 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+      <div class="container">
+        <div class="column">
+          <div class="row d-flex justify-content-center p-3 mb-2 bg-primary text-white">
+            <h5>Registrar Usuario</h5>
+          </div>
+          <form
+            class=""
+            [formGroup]="RegistForm" (ngSubmit)="onSubmit()"
+          >
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" class="form-control" formControlName="username" placeholder="Escribir El Username">
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="exampleInputEmail1">Nombre</label>
+                <input type="text" class="form-control" formControlName="name" placeholder="Escribir El Nombre">
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="exampleInputEmail1">Sexo</label>
+                <select
+                  class="form-control" formControlName="sexo" placeholder="Escribir Su Sexo">
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                </select>
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="text" class="form-control" formControlName="email" placeholder="Escribir tu Email">
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="exampleInputEmail1">Password</label>
+                <input type="password" class="form-control" formControlName="password" placeholder="Escribir tu Password">
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="exampleInputEmail1">Confirm Password</label>
+                <input type="password" class="form-control" formControlName="confirpassword" placeholder="Verificar tu Password">
+              </div>
+            </div>
+            <div class="d-flex justify-content-around">
+              <div class="p-2">
+                <button type="submit" class="btn btn-primary" routerLink="/login">Login</button>
+              </div>
+              <div class="p-2">
+                <button type="submit" class="btn btn-success">Registrarme</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

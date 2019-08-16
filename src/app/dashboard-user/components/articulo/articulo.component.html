@@ -1,0 +1,87 @@
+<div class="column">
+  <div class="row">
+    <div class="col">
+      <span>Mis Articulos</span>
+    </div>
+    <div class="">
+      <button (click)="open(false)" type="button" class="btn btn-primary">
+        <span *ngIf="!vistdisibled">Crear</span>
+        <span *ngIf="vistdisibled">Salir</span>
+      </button>
+    </div>
+  </div>
+  <div class="column">
+    <table class="table" *ngIf="!vistdisibled">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">img</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Creado</th>
+          <th scope="col">Actualizado</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of list; let idx=index;"
+        >
+          <th scope="row">{{ idx }}</th>
+          <td>
+            <img width="23%" class="rounded" [src]="item.foto" alt="">
+          </td>
+          <td>{{ item.titulo }}</td>
+          <td>{{ item.createdAt | date:'medium' }}</td>
+          <td>{{ item.updatedAt | date:'medium' }}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="open(item)">
+              <i class="fa fa-eye"></i>
+            </button>
+            <button type="button" class="btn btn-danger" (click)="delete(item, idx)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="column" *ngIf="vistdisibled">
+      <div class="d-flex justify-content-center p-3 mb-2 bg-primary text-white rounded">
+        <h5>Crear Articulo</h5>
+      </div>
+      <div class="row">
+        <form
+          [formGroup]="dataForm"
+        >
+          <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+              <img *ngIf="this.dataForm.value.foto" width="35%" [src]="this.dataForm.value.foto" class="rounded" alt="none">
+            </div>
+            <br>
+            <div class="col-sm-12">
+              <div class="form-group p-3">
+                <input type="file" (change)="datafiles($event)" class="custom-file-input" formControlName="file">
+                <label class="custom-file-label" for="customFileLangHTML" data-browse="Subir Imagen">Imagen</label>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>Titulo</label>
+                <input type="text" class="form-control" formControlName="titulo">
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>Descripcion</label>
+                <textarea class="form-control"class="form-control" formControlName="description" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-end">
+              <button (click)="onCreate()" *ngIf="!clone.id" class="btn btn-success">Agregar</button>
+              <button type="submit" *ngIf="clone.id" (click)="blur('description')" class="btn btn-success">Actualizar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

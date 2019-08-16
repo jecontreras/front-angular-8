@@ -1,0 +1,51 @@
+<div class="column">
+  <div class="row">
+  <div class="col-sm-6" *ngFor="let item of list; let idx=index;">
+    <img [src]="item.foto" class="card-img-top" alt="...">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.titulo }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Autor: {{ item.user.username }}</h6>
+        <p class="card-text">
+          {{ item.description}}
+        </p>
+        <a (click)="item.disabledcoment=!item.disabledcoment" class="btn btn-primary">Ver Comentarios</a>
+      </div>
+      <div *ngIf="item.disabledcoment" class="column">
+        <ul class="list-group list-group-flush mouse" *ngFor="let com of item.comentario; let idx1=index"
+          (click)="item.discoment=!item.discoment; actived=!actived"
+        >
+          <li class="list-group-item row">
+            <div class="row col">
+              <img width="13%" class="p-2" height="50px"[src]="com.user.foto || '/assets/img/perfil.jpg'" alt="none">
+
+              <div class="column col">
+                <span><small>Autor: {{ com.user.username }}</small></span>
+                <p><small>{{ com.comentario }}</small></p>
+                <p><small>{{ com.createdAt | date:'medium'}}</small></p>
+              </div>
+              <div class="p-3" *ngIf="com.user.id === user.id && actived">
+                <a class="mouse p-1" (click)="comentForm.patchValue(com); cuerpo = com;"><i class="fa fa-edit"></i></a>
+                <a class="mouse p-1" (click)="deleteComen(com,idx,idx1)"><i class="fa fa-trash"></i></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <form
+        [formGroup]="comentForm" (ngSubmit)="onSubmitComentario(item)"
+      >
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" formControlName="comentario" aria-describedby="Comentar" placeholder="Escribir Un Comentario">
+          </div>
+          <!-- <div class="">
+            <button type="submit" class="btn btn-success">Post</button>
+          </div> -->
+        </div>
+      </form>
+    </div>
+    <br>
+  </div>
+</div>
+</div>
